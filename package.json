@@ -1,0 +1,21 @@
+{
+  "name": "@patsnap/patent-literature-search-mcp",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A container-ready MCP bridge for PatSnap Patent & Literature Search.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "test:docker": "node scripts/docker-smoke.mjs",
+    "test:upstream": "node scripts/upstream-smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "zod": "3.25.76"
+  }
+}
