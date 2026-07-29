@@ -1,5 +1,7 @@
 FROM node:22-bookworm-slim
 
+LABEL io.modelcontextprotocol.server.name="io.github.patsnap/patent-literature-search-mcp"
+
 WORKDIR /app
 ENV NODE_ENV=production
 

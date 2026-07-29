@@ -1,5 +1,7 @@
 # Patent & Literature Search MCP
 
+<!-- mcp-name: io.github.patsnap/patent-literature-search-mcp -->
+
 [![Smithery badge](https://smithery.ai/badge/openpatsnap/patsnap-patent-literature-search)](https://smithery.ai/servers/openpatsnap/patsnap-patent-literature-search)
 
 Search 200M+ patents and scientific literature in natural language,

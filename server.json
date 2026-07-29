@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.patsnap/patent-literature-search-mcp",
+  "title": "Patsnap Patent & Literature Search",
+  "description": "Search 200M+ patents and 216M+ scientific papers using natural language and structured filters.",
+  "websiteUrl": "https://open.patsnap.com/marketplace/mcp-servers/patsnap-search",
+  "repository": {
+    "url": "https://github.com/patsnap/patent-literature-search-mcp",
+    "source": "github"
+  },
+  "version": "1.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://connect.patsnap.com/2b0355/logic-mcp?apikey={api_key}",
+      "variables": {
+        "api_key": {
+          "description": "Patsnap Open Platform API key",
+          "isRequired": true,
+          "isSecret": true
+        }
+      }
+    }
+  ]
+}
