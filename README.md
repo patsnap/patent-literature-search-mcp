@@ -4,15 +4,18 @@
 
 [![Smithery badge](https://smithery.ai/badge/openpatsnap/patsnap-patent-literature-search)](https://smithery.ai/servers/openpatsnap/patsnap-patent-literature-search)
 
-Search 200M+ patents and scientific literature in natural language,
-directly inside Claude, Cursor, or any MCP-compatible AI tool.
-Powered by Patsnap's proprietary R&D intelligence database.
+Search global patents and scientific literature in natural language,
+directly inside Claude, Cursor, or any MCP-compatible AI tool. The MCP
+supports semantic, keyword, BM25, and structured search, then retrieves
+selected records as AI-readable Markdown.
+
+> **Start free:** Register on [Patsnap Open Platform](https://open.patsnap.com)
+> to receive **10,000 free credits**. No credit card is required.
 
 ## About Patsnap
 
-Patsnap is a global innovation intelligence platform covering 200M+
-patents across 170+ jurisdictions (USPTO, EPO, WIPO and more), 216M+
-scientific papers, and R&D data.
+Patsnap is a global innovation intelligence platform covering patents,
+scientific literature, chemistry, life sciences, and other R&D data.
 
 To explore Patsnap data interactively, try
 [Eureka](https://eureka.patsnap.com), Patsnap's AI-native R&D
@@ -22,20 +25,122 @@ REST API via [Patsnap Open Platform](https://open.patsnap.com).
 ## What It Does
 
 Patent & Literature Search MCP gives your AI agent direct access to
-Patsnap's patent and academic literature databases — searchable
-together in a single query, in natural language, without switching
-tools or learning Boolean syntax.
+Patsnap's patent and academic-literature databases. A single natural-language
+research request can cover both corpora and combine the results for AI
+reasoning.
 
 - **Patent search** — keyword, assignee, inventor, IPC class, legal
   status, date range, and citation filters
 - **Literature search** — semantic and keyword search across
   peer-reviewed scientific papers
-- **Fusion search** — orchestrate patent and paper searches using the
+- **Cross-domain research** — orchestrate patent and paper searches using the
   same tool and combine the structured results for AI reasoning
 - **Natural language input** — describe your problem or topic in
   plain English or Chinese; the MCP constructs the search strategy
 - **Precision filtering** — filter by assignee, inventor, legal
   status, jurisdiction, date range, and citation count simultaneously
+
+## Data Coverage
+
+This MCP is backed by Patsnap's global patent and scientific-literature
+coverage.
+
+### Patent coverage
+
+| Data-source group | Representative sources | Coverage |
+|---|---|---|
+| International and regional authorities | WIPO/PCT, EPO, ARIPO, EAPO, OAPI, GCC | Applications, grants, and regional records |
+| Major national authorities | USPTO, CNIPA, JPO, KIPO, DPMA, INPI, UKIPO, CIPO, IP Australia | Applications, grants, designs, and utility models where applicable |
+| Additional jurisdictions | Patent authorities across Europe, Asia-Pacific, the Americas, the Middle East, and Africa | Bibliographic records and authority-supported document types |
+
+Patent data coverage includes:
+
+| Data type | What it covers |
+|---|---|
+| Bibliography | Publication and application identifiers, titles, dates, applicants, assignees, inventors, and classifications |
+| Full text | Abstracts, claims, descriptions, and other document text |
+| PDF | Original patent-document coverage for supported authorities |
+| Legal events | Status changes and patent lifecycle events |
+| File wrapper | Available prosecution and examination records |
+| License | Available patent licensing records |
+| Litigation | Available patent litigation records |
+
+Coverage is refreshed frequently, with patent data updated daily.
+
+### Scientific-literature coverage
+
+| Source type | Representative data sources and publications |
+|---|---|
+| Biomedical and clinical literature | PubMed, The Lancet, BMJ, JAMA, Blood, Cancer Research, Journal of Clinical Oncology, Gastroenterology |
+| Multidisciplinary journals | Nature, Science, Scientific Reports, PLOS ONE, Proceedings of the National Academy of Sciences |
+| Chemistry and materials science | Journal of the American Chemical Society, Angewandte Chemie, Journal of Chemical Physics, Chemical & Engineering News Archive |
+| Physics and engineering | Physical Review Letters, Physical Review B, Journal of Applied Physics, AIP Conference Proceedings, SPIE Proceedings |
+| Preprints and repositories | arXiv, HAL, SSRN, Zenodo, DOAJ |
+| Research datasets and specialist sources | ENCODE Datasets, Worldwide Protein Data Bank, OSTI, RePEc, GBIF, PsycEXTRA |
+
+Literature records include bibliographic metadata, abstracts, citation
+metadata, and PDF coverage. The collection spans journal articles,
+preprints, conference proceedings, repositories, datasets, and other
+non-patent literature.
+
+See [Patsnap Global Data Coverage](https://open.patsnap.com/data-coverage)
+for the current authority-level and publication-level coverage matrix.
+
+## What You Can Search
+
+`patsnap_search` searches either patents or scientific literature in one
+call. Its current input supports:
+
+| Input | What it does |
+|---|---|
+| `semantic_query` | Searches a natural-language technical description or concept |
+| `search_strategy` | Combines `semantic`, `keyword`, and `filter` strategies |
+| `keywords` | Runs precise keyword and BM25 matching |
+| `source` | Selects the `patent` or `paper` corpus |
+| `filters` | Applies provider-supported structured filters |
+| `sort` | Sorts by relevance or a provider-supported field |
+| `offset`, `limit` | Paginates results; up to 100 results per call |
+
+Patent filters may include assignees, inventors, IPC classifications,
+jurisdictions, filing or publication dates, legal status, and citation
+conditions. Exact filter names and operators depend on the current hosted
+tool schema.
+
+## What You Can Retrieve
+
+`patsnap_fetch` retrieves up to 100 selected result URLs or patent
+publication numbers as Markdown.
+
+### Patent modules
+
+| Module | Content that may be returned |
+|---|---|
+| `basic` | Bibliographic data, title, abstract, claims, description, and other available record content |
+| `citation` | Patent citations and non-patent literature references |
+| `legal` | Available patent legal data and events |
+| `family` | Available patent-family information |
+| `include_images` | Signed patent-drawing URLs when available |
+
+### Citation data
+
+The `citation` module can retrieve citation data for selected patents. Where
+available, this may include:
+
+- patents cited by the selected patent;
+- patents citing the selected patent;
+- applicant, examiner, or search-authority citations;
+- citation categories such as X, Y, and A;
+- cited non-patent literature; and
+- DOI and other bibliographic metadata for cited literature.
+
+Citation direction and type should be determined from the returned record
+labels. Availability and completeness vary by jurisdiction and patent.
+
+### Literature records
+
+Literature records support the `basic` module and may include title,
+abstract metadata, authors, affiliations, publication, publication date,
+DOI, and other available bibliographic identifiers.
 
 ## Quick Start
 
@@ -125,7 +230,8 @@ start the workflow with **Run workflow**, and enable
   request. Supports natural-language and semantic queries, precise keyword
   and BM25-based text search, and filters such as assignee, inventor, IPC
   classification, legal status, jurisdiction, date range, and citations.
-  Call it once per source when both corpora are required.
+  A single research request may invoke patent and literature searches and
+  combine their results.
 - `patsnap_fetch` — Retrieve a patent or literature record as Markdown using
   one or more result URLs. Patent records can also be fetched by publication
   number and may include bibliographic data, claims, descriptions, drawings,
